@@ -1,3 +1,26 @@
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
+
+var bicicletaSchema = new Schema({
+    code: Number, 
+    color: String,
+    modelo: String,
+    ubicacion: {
+        type: [Number], index: { type: '2dsphere', sparse: true}
+    }
+})
+
+bicicletaSchema.methods.toString = function() {
+    return `code: + this.code =  | color: ` + this.color
+}
+
+bicicletaSchema.statics.allBicis = function() {
+    return this.find({}, cb)
+}
+
+module.exports = mongoose.model('Bicicleta', bicicletaSchema)
+
+
 var Bicicleta = function(id, modelo, color, ubicacion) {
     this.id = id;
     this.modelo = modelo;
@@ -32,10 +55,12 @@ Bicicleta.removeById = function(aBiciID){
     }
 }
 
+/*
 var a = new Bicicleta(1, 'rojo', 'urbana', [-34.6012424, -58.3861497]);
 var b = new Bicicleta(2, 'azul', 'montaña', [-34.765439, -58,9876322]);
 
 Bicicleta.add(a);
-Bicicleta.add(b)
+Bicicleta.add(b);
+*/
 
 module.exports = Bicicleta;

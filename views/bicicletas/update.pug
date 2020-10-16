@@ -1,32 +1,26 @@
 extends ../layout
 
-block content 
-    a(href='bicicletas') Volver
+block content
+  a(href='/usuarios') Volver
 
-    br
-    br
-    br
+  br
+  br
+  br
 
-    h1 Actualizar Bicicleta
+  h1  Actualizando Usuario
 
+  br
+  br
+
+  form(action=`/usuarios/${usuario.id}/update` method='post')
+    .form-group
+        label(for='nombre') Nombre: 
+        input#nombre.form-control(type='text' name='nombre' value= usuario.nombre class=errors.nombre ? 'is-invalid' : '')
+        if errors.nombre
+            small#nombreHelp.text-danger
+               = errors.nombre.message  
+    
+    
     br
     br
-
-    from(action=`/biciciletas/${bici.id}/update` method='post')
-        label(for="id") Id:
-        input#id(type="text" name="id" value=bici.id)
-        br
-        label(from='modelo') Modelo:
-        input#modelo(type="text" name="modelo" value=bici.color)
-        br
-        label(from='modelo') Color:
-        input#color(type="text" name="color" value=bici.modelo)
-        br
-        label(from='lat') Latitud:
-        input#modelo(type="text" name="lat" value=bici.ubicacion[0])
-        br
-        label(from='lng') Longitud:
-        input#modelo(type="text" name="lng" value=bici.ubicacion[1])
-        br
-        br
-        input.btn(type="submit" name="OK")
+    input.btn.btn-primary(type='submit' value='OK')

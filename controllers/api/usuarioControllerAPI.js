@@ -1,16 +1,27 @@
-var mongoose = require('mongoose')
-const { deleteOne } = require('../../models/reserva')
-var Reserva = require('./reserva')
-var Schema = mongoose.Schema
+const Usuario = require('../../models/usuario')
 
-var usuarioSchema = new Schema({
-    nombre: String
-})
-
-usuarioSchema.methods.reservar = function (biciID, desde, hasta, cb) {
-    var reserva = new Reserva({ usuario: this._id, bicicleta: biciID, desde: desde, hasta: hasta })
-    console.log(reserva)
-    reserva.save(cb)
+exports.usuarios_list = function(req, res) {
+    Usuario.find({}, function() {
+        res.status(200).json() ({
+            usuarios: usuarios
+        })
+    })
 }
 
-module.exports = mongoose.model('Usuario', usuarioSchema)
+exports.usuarios_create = function(req, res) {
+    var usuario = new usuario ({ nombre: req.body.nombre })
+
+    usuario.save(function(){ 
+        res.status(200).json(usuario)
+    })
+}
+
+exports.usuario_reservar = function(req, res) {
+    Usuario.findById(req.body.id, function(err, usuario) {
+        console.log(usuario)
+        usuario.reservar(req.body.bici.id, req.body.desde, req.body.hasta, function(err) {
+            console.log('reserva!!')
+            res.status(200).send()
+        })
+    })
+}

@@ -20,8 +20,12 @@ bicicletaSchema.statics.allBicis = function() {
 
 module.exports = mongoose.model('Bicicleta', bicicletaSchema)
 
-
 var Bicicleta = function(id, modelo, color, ubicacion) {
+    this.id = id;
+    this.modelo = modelo;
+}
+
+/*var Bicicleta = function(id, modelo, color, ubicacion) {
     this.id = id;
     this.modelo = modelo;
     this.color = color;
@@ -53,7 +57,9 @@ Bicicleta.removeById = function(aBiciID){
             break;
         }
     }
-}
+}*/
+
+
 
 /*
 var a = new Bicicleta(1, 'rojo', 'urbana', [-34.6012424, -58.3861497]);
@@ -62,5 +68,5 @@ var b = new Bicicleta(2, 'azul', 'montaña', [-34.765439, -58,9876322]);
 Bicicleta.add(a);
 Bicicleta.add(b);
 */
-
+    
 module.exports = Bicicleta;
